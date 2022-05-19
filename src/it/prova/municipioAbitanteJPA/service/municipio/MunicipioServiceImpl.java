@@ -154,14 +154,33 @@ public class MunicipioServiceImpl implements MunicipioService {
 
 	@Override
 	public List<Municipio> cercaTuttiIMunicipiConMinorenni() throws Exception {
-		// questo è come una connection
+
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 
 		try {
-			
+
 			municipioDAO.setEntityManager(entityManager);
 
 			return municipioDAO.findAllByAbitantiMinorenni();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
+	}
+
+	@Override
+	public List<Municipio> cercaTuttiIMunicipiConDescrizioneIniziaCon(String iniziale) throws Exception {
+
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+		try {
+
+			municipioDAO.setEntityManager(entityManager);
+
+			return municipioDAO.findAllByDescrizioneIniziaCon(iniziale);
 
 		} catch (Exception e) {
 			e.printStackTrace();

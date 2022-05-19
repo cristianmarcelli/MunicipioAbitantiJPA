@@ -54,7 +54,11 @@ public class TestMunicipioAbitante {
 //			System.out.println(
 //					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");
 
-			testCercaTuttiIMunicipiConMinorenni(municipioService, abitanteService);
+//			testCercaTuttiIMunicipiConMinorenni(municipioService, abitanteService);
+//			System.out.println(
+//					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");
+
+			testCercaTuttiIMunicipiConDescrizioneIniziaCon(municipioService, abitanteService);
 			System.out.println(
 					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");
 
@@ -239,6 +243,15 @@ public class TestMunicipioAbitante {
 		System.out.println(municipioService.cercaTuttiIMunicipiConMinorenni());
 
 		System.out.println(".......testCercaTuttiIMunicipiConMinorenni fine: PASSED.............");
+	}
+
+	private static void testCercaTuttiIMunicipiConDescrizioneIniziaCon(MunicipioService municipioService,
+			AbitanteService abitanteService) throws Exception {
+		System.out.println(".......testCercaTuttiIMunicipiConDescrizioneIniziaCon inizio.............");
+
+		System.out.println(municipioService.cercaTuttiIMunicipiConDescrizioneIniziaCon("Mun"));
+
+		System.out.println(".......testCercaTuttiIMunicipiConDescrizioneIniziaCon fine: PASSED.............");
 	}
 
 }
