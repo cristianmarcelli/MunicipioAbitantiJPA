@@ -50,7 +50,11 @@ public class TestMunicipioAbitante {
 //			System.out.println(
 //					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");
 
-			testCercaTuttiGliAbitantiTramiteCodiceMunicipio(municipioService, abitanteService);
+//			testCercaTuttiGliAbitantiTramiteCodiceMunicipio(municipioService, abitanteService);
+//			System.out.println(
+//					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");
+
+			testCercaTuttiIMunicipiConMinorenni(municipioService, abitanteService);
 			System.out.println(
 					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");
 
@@ -222,9 +226,19 @@ public class TestMunicipioAbitante {
 		System.out.println(".......testCercaTuttiGliAbitantiTramiteCodiceMunicipio inizio.............");
 
 		System.out.println(abitanteService.cercaTuttiGliAbitantiTramiteCodiceMunicipio("III"));
-		
 
 		System.out.println(".......testCercaTuttiGliAbitantiTramiteCodiceMunicipio fine: PASSED.............");
+	}
+
+	// METODI MUNICIPIO###########################
+
+	private static void testCercaTuttiIMunicipiConMinorenni(MunicipioService municipioService,
+			AbitanteService abitanteService) throws Exception {
+		System.out.println(".......testCercaTuttiIMunicipiConMinorenni inizio.............");
+
+		System.out.println(municipioService.cercaTuttiIMunicipiConMinorenni());
+
+		System.out.println(".......testCercaTuttiIMunicipiConMinorenni fine: PASSED.............");
 	}
 
 }

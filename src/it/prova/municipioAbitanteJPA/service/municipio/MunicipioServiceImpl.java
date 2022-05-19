@@ -75,7 +75,7 @@ public class MunicipioServiceImpl implements MunicipioService {
 			EntityManagerUtil.closeEntityManager(entityManager);
 		}
 	}
-	
+
 	@Override
 	public void inserisciNuovo(Municipio municipioInstance) throws Exception {
 		// questo è come una connection
@@ -158,10 +158,9 @@ public class MunicipioServiceImpl implements MunicipioService {
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 
 		try {
-			// uso l'injection per il dao
+			
 			municipioDAO.setEntityManager(entityManager);
 
-			// eseguo quello che realmente devo fare
 			return municipioDAO.findAllByAbitantiMinorenni();
 
 		} catch (Exception e) {
