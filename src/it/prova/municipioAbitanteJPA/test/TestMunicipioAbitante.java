@@ -42,7 +42,15 @@ public class TestMunicipioAbitante {
 //
 //			testLazyInitExc(municipioService, abitanteService);
 
-			testCercaTuttiGliAbitantiConCognome(municipioService, abitanteService);
+//			testCercaTuttiGliAbitantiConCognome(municipioService, abitanteService);
+//			System.out.println(
+//					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");
+
+//			testCercaTuttiGliAbitantiConCognome(municipioService, abitanteService);
+//			System.out.println(
+//					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");
+
+			testCercaTuttiGliAbitantiTramiteCodiceMunicipio(municipioService, abitanteService);
 			System.out.println(
 					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");
 
@@ -184,7 +192,7 @@ public class TestMunicipioAbitante {
 
 	private static void testCercaTuttiGliAbitantiConCognome(MunicipioService municipioService,
 			AbitanteService abitanteService) throws Exception {
-		System.out.println(".......testCercaTuttiGliAbitantiConNome inizio.............");
+		System.out.println(".......testCercaTuttiGliAbitantiConCognome inizio.............");
 
 		List<Municipio> listaMunicipiPresenti = municipioService.listAllMunicipi();
 		if (listaMunicipiPresenti.isEmpty())
@@ -201,12 +209,22 @@ public class TestMunicipioAbitante {
 		abitanteService.inserisciNuovo(nuovoAbitante2);
 
 		if (abitanteService.cercaTuttiGliAbitantiConCognome("Bassi").size() != 2)
-			throw new RuntimeException("testCercaTuttiGliAbitantiConNome fallito: numero record inatteso ");
+			throw new RuntimeException("testCercaTuttiGliAbitantiConCognome fallito: numero record inatteso ");
 
 		abitanteService.rimuovi(nuovoAbitante.getId());
 		abitanteService.rimuovi(nuovoAbitante2.getId());
 
-		System.out.println(".......testCercaTuttiGliAbitantiConNome fine: PASSED.............");
+		System.out.println(".......testCercaTuttiGliAbitantiConCognome fine: PASSED.............");
+	}
+
+	private static void testCercaTuttiGliAbitantiTramiteCodiceMunicipio(MunicipioService municipioService,
+			AbitanteService abitanteService) throws Exception {
+		System.out.println(".......testCercaTuttiGliAbitantiTramiteCodiceMunicipio inizio.............");
+
+		System.out.println(abitanteService.cercaTuttiGliAbitantiTramiteCodiceMunicipio("III"));
+		
+
+		System.out.println(".......testCercaTuttiGliAbitantiTramiteCodiceMunicipio fine: PASSED.............");
 	}
 
 }
