@@ -21,26 +21,30 @@ public class TestMunicipioAbitante {
 		try {
 
 			// ora con il service posso fare tutte le invocazioni che mi servono
+//			System.out.println(
+//					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");
+//
+//			testInserisciMunicipio(municipioService);
+//			System.out.println(
+//					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");
+//
+//			testInserisciAbitante(municipioService, abitanteService);
+//			System.out.println(
+//					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");
+//
+//			testRimozioneAbitante(municipioService, abitanteService);
+//			System.out.println(
+//					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");
+//
+//			testCercaTuttiGliAbitantiConNome(municipioService, abitanteService);
+//			System.out.println(
+//					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");
+//
+//			testLazyInitExc(municipioService, abitanteService);
+
+			testCercaTuttiGliAbitantiConCognome(municipioService, abitanteService);
 			System.out.println(
 					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");
-
-			testInserisciMunicipio(municipioService);
-			System.out.println(
-					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");
-
-			testInserisciAbitante(municipioService, abitanteService);
-			System.out.println(
-					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");
-
-			testRimozioneAbitante(municipioService, abitanteService);
-			System.out.println(
-					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");
-
-			testCercaTuttiGliAbitantiConNome(municipioService, abitanteService);
-			System.out.println(
-					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");
-
-			testLazyInitExc(municipioService, abitanteService);
 
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -176,6 +180,33 @@ public class TestMunicipioAbitante {
 		// se usiamo un caricamento EAGER risolviamo...dipende da cosa ci serve!!!
 		// municipioService.caricaSingoloMunicipioConAbitanti(...);
 		System.out.println(".......testLazyInitExc fine: PASSED.............");
+	}
+
+	private static void testCercaTuttiGliAbitantiConCognome(MunicipioService municipioService,
+			AbitanteService abitanteService) throws Exception {
+		System.out.println(".......testCercaTuttiGliAbitantiConNome inizio.............");
+
+		List<Municipio> listaMunicipiPresenti = municipioService.listAllMunicipi();
+		if (listaMunicipiPresenti.isEmpty())
+			throw new RuntimeException(
+					"testCercaTuttiGliAbitantiConNome fallito: non ci sono municipi a cui collegarci ");
+
+		Abitante nuovoAbitante = new Abitante("Mariotto", "Bassi", 27, "Via Lucca");
+		Abitante nuovoAbitante2 = new Abitante("Andrea", "Bassi", 37, "Via Roma");
+
+		nuovoAbitante.setMunicipio(listaMunicipiPresenti.get(0));
+		nuovoAbitante2.setMunicipio(listaMunicipiPresenti.get(0));
+
+		abitanteService.inserisciNuovo(nuovoAbitante);
+		abitanteService.inserisciNuovo(nuovoAbitante2);
+
+		if (abitanteService.cercaTuttiGliAbitantiConCognome("Bassi").size() != 2)
+			throw new RuntimeException("testCercaTuttiGliAbitantiConNome fallito: numero record inatteso ");
+
+		abitanteService.rimuovi(nuovoAbitante.getId());
+		abitanteService.rimuovi(nuovoAbitante2.getId());
+
+		System.out.println(".......testCercaTuttiGliAbitantiConNome fine: PASSED.............");
 	}
 
 }
